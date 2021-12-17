@@ -17,20 +17,17 @@ int main(int argc, char **argv) {
     if (p < 2) {
         MPI_Finalize();
     }
-    int n = 7;
+    int n = atoi(argv[3]);
     int block_size = (n + 1) / p;
     double *matrix;
     double *buff;
 
     if (rank == 0) {
-        matrix = new double[(n * (n + 1))]{1.0, 2.0, 3.0, 1.0, 3.0, 0.0, 0.0, 4.0,
-                                           2.0, 3.0, 4.0, 1.0, 0.0, 0.0, 0.0, 5.0,
-                                           10.0, 4.0, 5.0, 0.0, 2.0, 0.0, 0.0, 6.0,
-                                           0.0, 0.0, 0.0, 2.0, 2.0, 0.0, 0.0, 7.0,
-                                           0.0, 0.0, 0.0, 0.0, 3.0, 4.0, 0.0, 8.0,
-                                           0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 2.0, 9.0,
-                                           0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 10.0,};
-        std::cout << block_size << std::endl;
+        matrix = new double[(n * (n + 1))];
+        for (int i = 0; i < n * (n + 1); i++) {
+            sscanf(argv[i+4],"%lf", &matrix[i]);
+        }
+//        std::cout << block_size << std::endl;
         for (int pr = p - 1; pr >= 0; --pr) {
             buff = new double[n * block_size];
             for (int i = 0; i < n; ++i) {
