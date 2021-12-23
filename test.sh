@@ -10,17 +10,14 @@ matrix=(1.0, 2.0, 3.0, 1.0, 3.0, 0.0, 0.0, 4.0,
         0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 10.0)
 
 g++ -o test  test.cpp
-result=$(./test ${n} ${matrix[@]})
+echo "Not parallel"
+result=$(time ./test $n ${matrix[@]})
 
-result_mpi=$(/home/user/gauss_mpi/cmake-build-debug/PIRV_3 -n 4 ${n} ${matrix[@]})
+echo "Parallel"
+result_mpi=$(time ./PIRV_3 -n 4 $n ${matrix[@]} 2>/dev/null)
 
-#for i in ${result[@]}; do echo $i; done
-for ((i=0; i< ${n} * (${n} + 1); i++))
-do
-  if ($(${result[i]} - ${result_mpi[i]}) <= 0.1 && $(${result[i]} - ${result_mpi[i]}) >= -0.1); then
-    echo "FALSE"
-    break
-  fi
-done
+echo "Results Parallel"
+echo ${result_mpi[0]}
 
-echo "TRUE"
+echo "Result Not parallel"
+echo ${result[0]}

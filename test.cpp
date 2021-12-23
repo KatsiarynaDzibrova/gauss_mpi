@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
         x[i] /= matrix[i * (n + 1) + i];
     }
     for (int i = 0; i < n; ++i) {
-        std::cout << x[i] + 1 << "\t";
+        std::cout << x[i] << "\t";
     }
     std::cout << std::endl;
 
