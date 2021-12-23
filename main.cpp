@@ -19,6 +19,8 @@ int main(int argc, char **argv) {
         MPI_Finalize();
     }
     int n = atoi(argv[3]);
+//    int n;
+//    std::cin >> n;
     int block_size = (n + 1) / p;
     double *matrix;
     double *buff;
@@ -29,7 +31,8 @@ int main(int argc, char **argv) {
     if (rank == 0) {
         matrix = new double[(n * (n + 1))];
         for (int i = 0; i < n * (n + 1); i++) {
-            sscanf(argv[i+4],"%lf", &matrix[i]);
+//            sscanf(argv[i+4],"%lf", &matrix[i]);
+            std::cin >> matrix[i];
         }
 //        std::cout << block_size << std::endl;
         for (int pr = p - 1; pr >= 0; --pr) {

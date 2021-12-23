@@ -1,12 +1,16 @@
 #include <fstream>
+#include <iostream>
 
 int main(int argc, char *argv[]) {
     std::ofstream out("result.txt");
     int n = atoi(argv[1]);
+//    int n;
+//    std::cin >> n;
     double *matrix;
     matrix = new double[(n * (n + 1))];
     for (int i = 0; i < n * (n + 1); i++) {
-        sscanf(argv[i+2],"%lf", &matrix[i]);
+//        sscanf(argv[i+2],"%lf", &matrix[i]);
+        std::cin >> matrix[i];
     }
     for (int k = 0; k < n - 1; ++k) {
         for (int i = k + 1; i < n; ++i) {
