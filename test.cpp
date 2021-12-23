@@ -1,6 +1,7 @@
-#include <iostream>
+#include <fstream>
 
 int main(int argc, char *argv[]) {
+    std::ofstream out("result.txt");
     int n = atoi(argv[1]);
     double *matrix;
     matrix = new double[(n * (n + 1))];
@@ -25,10 +26,9 @@ int main(int argc, char *argv[]) {
         x[i] /= matrix[i * (n + 1) + i];
     }
     for (int i = 0; i < n; ++i) {
-        std::cout << x[i] << "\t";
+        out << x[i] << std::endl;
     }
-    std::cout << std::endl;
-
+    out << std::endl;
     return 0;
 }
 

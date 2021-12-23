@@ -2,10 +2,11 @@
 #include <sstream>
 #include <iomanip>
 #include <string>
+#include <fstream>
 #include "/usr/lib/x86_64-linux-gnu/openmpi/include/mpi.h"
 
 int main(int argc, char **argv) {
-
+    std::ofstream out("result_mpi.txt");
     int tag = 55;
     int tag2 = 56;
     int tag3 = 57;
@@ -25,7 +26,6 @@ int main(int argc, char **argv) {
     double end_time;
     double receive_time = 0;
     double operation_time = 0;
-
     if (rank == 0) {
         matrix = new double[(n * (n + 1))];
         for (int i = 0; i < n * (n + 1); i++) {
@@ -125,12 +125,10 @@ int main(int argc, char **argv) {
         std::cout << "Время обратного хода " << std::setprecision(3) << std::fixed << (end_time - start_time) * 1000 << "мс" << "\n";
         std::cout << "Время пересылок " << std::setprecision(3) << std::fixed << receive_time  * 1000 << "мс" << "\n";
         std::cout << "Время операций " << std::setprecision(3) << std::fixed << operation_time  * 1000 << "мс" << "\n";
-        std::cout << "Результат " << "\n";
         for (int i = 0; i < n; ++i) {
-            std::cout << std::setprecision(3) << std::fixed << x[i] << std::endl;
+            out << std::setprecision(3) << std::fixed << x[i] << std::endl;
         }
-        std::cout << std::endl;
+        out << std::endl;
     }
-    
     MPI_Finalize();
 }
