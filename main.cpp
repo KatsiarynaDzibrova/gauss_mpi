@@ -28,6 +28,7 @@ int main(int argc, char **argv) {
     double end_time;
     double receive_time = 0;
     double operation_time = 0;
+    double total_start_time = MPI_Wtime();
     if (rank == 0) {
         matrix = new double[(n * (n + 1))];
         for (int i = 0; i < n * (n + 1); i++) {
@@ -128,8 +129,9 @@ int main(int argc, char **argv) {
         std::cout << "Время обратного хода " << std::setprecision(3) << std::fixed << (end_time - start_time) * 1000 << "мс" << "\n";
         std::cout << "Время пересылок " << std::setprecision(3) << std::fixed << receive_time  * 1000 << "мс" << "\n";
         std::cout << "Время операций " << std::setprecision(3) << std::fixed << operation_time  * 1000 << "мс" << "\n";
+        std::cout << "Общее время " << std::setprecision(3) << std::fixed << (end_time - total_start_time)  * 1000 << "мс" << "\n";
         for (int i = 0; i < n; ++i) {
-            out << std::setprecision(3) << std::fixed << x[i] << std::endl;
+            out << std::setprecision(10) << std::fixed << x[i] << std::endl;
         }
         out << std::endl;
     }

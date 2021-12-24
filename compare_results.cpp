@@ -10,7 +10,7 @@ int main() {
         res_mpi >> line_mpi;
         double line;
         res >> line;
-        if (fabs(line_mpi - line) > 0.1) {
+        if (fabs(line_mpi - line) > 0.00001) {
             std::cout << "Results are not equal!" << std::endl;
             return 0;
         }

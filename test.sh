@@ -7,10 +7,14 @@ matrix=$(./generate_test $n)
 
 g++ -o test  test.cpp
 echo "Not parallel"
-result=$(time ./test $n < input.txt)
+result=$(./test $n < input.txt)
 
 echo "Parallel"
-result_mpi=$(time ./PIRV_3 -n 4 $n < input.txt 2>/dev/null)
+result_mpi=$(./PIRV_3 -n 4 $n < input.txt 2>/dev/null)
+
+echo
+echo "Results Not parallel"
+echo ${result[0]}
 
 echo
 echo "Results Parallel"
